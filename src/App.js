@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { Products } from "./Products";
 import { Home } from "./Home";
@@ -17,18 +17,20 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <div className="App">
-          <NavBar navs={navlinks} />
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route
-              path="/user"
-              element={<User firstName="John" lastName="Doe" />}
-            ></Route>
-            <Route path="/products" element={<Products />}></Route>
-            <Route path="/contact" element={<Contact />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-          </Routes>
-          <Footer />
+          <div className="container">
+            <NavBar navs={navlinks} />
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route
+                path="/user"
+                element={<User firstName="John" lastName="Doe" />}
+              ></Route>
+              <Route path="/products" element={<Products />}></Route>
+              <Route path="/contact" element={<Contact />}></Route>
+              <Route path="/register" element={<Register />}></Route>
+            </Routes>
+            <Footer />
+          </div>
         </div>
       </BrowserRouter>
     </ThemeProvider>

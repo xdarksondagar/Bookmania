@@ -1,0 +1,13 @@
+footer {
+  width: 100%;
+  padding-block: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+footer small {
+  margin-top: 1rem;
+  color: rgba(0, 0, 0, 0.4);
+}
