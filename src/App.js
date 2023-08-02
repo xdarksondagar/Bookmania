@@ -1,51 +1,37 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
+import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { Products } from "./Products";
 import { Home } from "./Home";
 import { User } from "./User";
 import { Contact } from "./Contact";
+import { NavBar } from "./component/NavBar/NavBar";
+import { Footer } from "./component/Footer/Footer";
+import { Register } from "./pages/Register/Register";
+import { theme } from "./theme/index";
 
 function App() {
+  let navlinks = ["register", "user", "products", "contact"];
   return (
-    <BrowserRouter>
-      <div className="App">
-        <header>
-          <NavLink to="/">
-            <h1>BookMania</h1>
-          </NavLink>
-          <ul
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              listStyle: "none",
-              gap: "10px",
-            }}
-          >
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/user">User</NavLink>
-            </li>
-            <li>
-              <NavLink to="/products">Products</NavLink>
-            </li>
-            <li>
-              <NavLink to="/contact">Contact</NavLink>
-            </li>
-          </ul>
-        </header>
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route
-            path="/user"
-            element={<User firstName="John" lastName="Doe" />}
-          ></Route>
-          <Route path="/products" element={<Products />}></Route>
-          <Route path="/contact" element={<Contact />}></Route>
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <div className="App">
+          <NavBar navs={navlinks} />
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route
+              path="/user"
+              element={<User firstName="John" lastName="Doe" />}
+            ></Route>
+            <Route path="/products" element={<Products />}></Route>
+            <Route path="/contact" element={<Contact />}></Route>
+            <Route path="/register" element={<Register />}></Route>
+          </Routes>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
