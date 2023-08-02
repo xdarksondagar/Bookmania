@@ -8,8 +8,9 @@ import {
   CardActions,
   Button,
 } from "@material-ui/core";
-import { Formik, validateYupSchema } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
+import "./style.css";
 
 const roles = [
   {
@@ -53,79 +54,89 @@ export const Register = () => {
 
   return (
     <>
-      <div style={{ textAlign: "center" }}>
-        <Breadcrumbs
-          separator=">"
-          aria-label="breadcrumbs"
-          sx={{
-            "& ol": {
-              justifyContent: "center",
-              margin: "auto",
-            },
-          }}
-        >
-          <Link href="#" color="inherit" onClick={(e) => e.preventDefault()}>
-            Home
-          </Link>
-          <Link href="#" color="inherit" onClick={(e) => e.preventDefault()}>
-            Register
-          </Link>
-        </Breadcrumbs>
-      </div>
-      <Typography variant="h4" align="center">
+      <Breadcrumbs separator=">" aria-label="breadcrumbs">
+        <Link href="#" color="inherit" onClick={(e) => e.preventDefault()}>
+          Home
+        </Link>
+        <Link href="#" color="inherit" onClick={(e) => e.preventDefault()}>
+          Register
+        </Link>
+      </Breadcrumbs>
+      <Typography variant="h3" align="center" className="register_header">
         Create New Account
       </Typography>
 
       {/* form start */}
       <Formik
         initialValues={initialValues}
-        validationSchema={validateYupSchema}
+        validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ values, errors, handleChange, handleSubmit }) => (
+        {({
+          values,
+          errors,
+          touched,
+          handleBlur,
+          handleChange,
+          handleSubmit,
+        }) => (
           <form onSubmit={handleSubmit}>
             <div>
-              <Typography variant="h6">Personal Information</Typography>
+              <Typography variant="h6" className="form__title">
+                Personal Information
+              </Typography>
               <hr />
-              <Typography color="textSecondary">
+              <Typography color="textSecondary" className="form__subtitle">
                 Please enter the following information to create your account.
               </Typography>
             </div>
-            <CardContent>
+            <CardContent className="form__group">
               <TextField
+                className="form__input"
                 name="firstName"
                 label="First Name"
                 value={values.firstName}
-                handleChange={handleChange}
-                error={Boolean(errors.firstName)}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                helperText={touched.firstName ? errors.firstName : ""}
+                error={touched.firstName && Boolean(errors.firstName)}
                 variant="outlined"
                 fullWidth
               ></TextField>
               <TextField
+                className="form__input"
                 name="lastName"
                 label="Last Name"
                 value={values.lastName}
-                handleChange={handleChange}
-                error={Boolean(errors.lastName)}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                helperText={touched.lastName ? errors.lastName : ""}
+                error={touched.lastName && Boolean(errors.lastName)}
                 variant="outlined"
                 fullWidth
               ></TextField>
               <TextField
+                className="form__input"
                 name="email"
                 label="Email"
                 value={values.email}
-                handleChange={handleChange}
-                error={Boolean(errors.email)}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                helperText={touched.email ? errors.email : ""}
+                error={touched.email && Boolean(errors.email)}
                 variant="outlined"
                 fullWidth
               ></TextField>
               <TextField
+                className="form__input"
                 select
                 name="roleId"
                 label="Role"
                 value={values.roleId}
-                handleChange={handleChange}
-                error={Boolean(errors.roleId)}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                helperText={touched.roleId ? errors.roleId : ""}
+                error={touched.roleId && Boolean(errors.roleId)}
                 variant="outlined"
                 fullWidth
               >
@@ -136,30 +147,47 @@ export const Register = () => {
                 ))}
               </TextField>
             </CardContent>
-            <Typography variant="h6">Login Information</Typography>
+            <Typography variant="h6" className="form__title">
+              Login Information
+            </Typography>
             <hr />
-            <CardContent>
+            <CardContent className="form__group">
               <TextField
+                className="form__input"
                 name="password"
                 label="Password"
                 value={values.password}
-                handleChange={handleChange}
-                error={Boolean(errors.password)}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                helperText={touched.password ? errors.password : ""}
+                error={touched.password && Boolean(errors.password)}
                 variant="outlined"
                 fullWidth
               ></TextField>
               <TextField
+                className="form__input"
                 name="confirmPassword"
                 label="Confirm Password"
                 value={values.confirmPassword}
-                handleChange={handleChange}
-                error={Boolean(errors.confirmPassword)}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                helperText={
+                  touched.confirmPassword ? errors.confirmPassword : ""
+                }
+                error={
+                  touched.confirmPassword && Boolean(errors.confirmPassword)
+                }
                 variant="outlined"
                 fullWidth
               ></TextField>
             </CardContent>
             <CardActions>
-              <Button type="submit" variant="contained" color="primary">
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className="form__btn"
+              >
                 Register
               </Button>
             </CardActions>

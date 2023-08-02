@@ -3,15 +3,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { Products } from "./Products";
 import { Home } from "./Home";
-import { User } from "./User";
 import { Contact } from "./Contact";
 import { NavBar } from "./component/NavBar/NavBar";
 import { Footer } from "./component/Footer/Footer";
 import { Register } from "./pages/Register/Register";
 import { theme } from "./theme/index";
+import { Login } from "./pages/Login/Login";
 
 function App() {
-  let navlinks = ["register", "user", "products", "contact"];
+  let navlinks = ["register", "login", "products", "contact"];
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -21,10 +21,7 @@ function App() {
             <NavBar navs={navlinks} />
             <Routes>
               <Route path="/" element={<Home />}></Route>
-              <Route
-                path="/user"
-                element={<User firstName="John" lastName="Doe" />}
-              ></Route>
+              <Route path="/login" element={<Login />}></Route>
               <Route path="/products" element={<Products />}></Route>
               <Route path="/contact" element={<Contact />}></Route>
               <Route path="/register" element={<Register />}></Route>
