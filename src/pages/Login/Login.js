@@ -1,10 +1,14 @@
 import { Breadcrumbs, Button, Typography, TextField } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import "./style.css";
+import authService from "../../service/auth-service";
+import { toast } from "react-toastify";
 
 export const Login = () => {
+  const navigate = useNavigate();
+
   const initialValues = [
     {
       email: "",
@@ -20,6 +24,14 @@ export const Login = () => {
       .required("Password is required")
       .min(8, "Password must contain atleast 8 characters"),
   });
+
+  const onSubmit = (data) => {
+    authService.login(data).then((res) => {
+      if (!res.id) return;
+      toast.success("Login successfull!!");
+      navigate("/");
+    });
+  };
 
   return (
     <>
@@ -72,7 +84,7 @@ export const Login = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={() => alert("You've Logged In!!")}
+            onSubmit={onSubmit}
           >
             {({
               values,

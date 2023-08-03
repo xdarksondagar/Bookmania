@@ -11,6 +11,9 @@ import {
 import { Formik } from "formik";
 import * as Yup from "yup";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
+import authService from "../../service/auth-service";
+import { toast } from "react-toastify";
 
 const roles = [
   {
@@ -24,6 +27,8 @@ const roles = [
 ];
 
 export const Register = () => {
+  let navigate = useNavigate();
+
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -48,8 +53,14 @@ export const Register = () => {
       .required("Confirm your password"),
   });
 
-  function onSubmit() {
-    alert("Registered successfully!!!");
+  function onSubmit(data) {
+    delete data.confirmPassword;
+
+    authService.create(data).then((res) => {
+      if (!res.id) return;
+      toast.success("Account created successfully!!");
+      navigate("/login");
+    });
   }
 
   return (
