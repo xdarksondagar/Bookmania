@@ -5,6 +5,7 @@ export const useStyle = makeStyles({
     display: "flex",
     paddingBlock: "2rem",
     justifyContent: "space-between",
+    alignItems: "center",
     "&::before": {
       content: "''",
       width: "100%",

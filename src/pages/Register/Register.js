@@ -14,6 +14,7 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 import authService from "../../service/auth-service";
 import { toast } from "react-toastify";
+import { routePaths } from "../../utils/enum";
 
 const roles = [
   {
@@ -59,19 +60,21 @@ export const Register = () => {
     authService.create(data).then((res) => {
       if (!res.id) return;
       toast.success("Account created successfully!!");
-      navigate("/login");
+      navigate(routePaths.login);
     });
   }
 
   return (
     <>
       <Breadcrumbs separator=">" aria-label="breadcrumbs">
-        <Link href="#" color="inherit" onClick={(e) => e.preventDefault()}>
+        <Link
+          to={routePaths.home}
+          color="inherit"
+          onClick={(e) => e.preventDefault()}
+        >
           Home
         </Link>
-        <Link href="#" color="inherit" onClick={(e) => e.preventDefault()}>
-          Register
-        </Link>
+        <Typography color="primary">Register</Typography>
       </Breadcrumbs>
       <Typography variant="h3" align="center" className="register_header">
         Create New Account
@@ -104,6 +107,7 @@ export const Register = () => {
             <CardContent className="form__group">
               <TextField
                 className="form__input"
+                type="text"
                 name="firstName"
                 label="First Name"
                 value={values.firstName}
@@ -116,6 +120,7 @@ export const Register = () => {
               ></TextField>
               <TextField
                 className="form__input"
+                type="text"
                 name="lastName"
                 label="Last Name"
                 value={values.lastName}
@@ -128,6 +133,7 @@ export const Register = () => {
               ></TextField>
               <TextField
                 className="form__input"
+                type="email"
                 name="email"
                 label="Email"
                 value={values.email}
@@ -139,8 +145,8 @@ export const Register = () => {
                 fullWidth
               ></TextField>
               <TextField
-                className="form__input"
                 select
+                className="form__input"
                 name="roleId"
                 label="Role"
                 value={values.roleId}
@@ -165,6 +171,7 @@ export const Register = () => {
             <CardContent className="form__group">
               <TextField
                 className="form__input"
+                type="password"
                 name="password"
                 label="Password"
                 value={values.password}
@@ -176,6 +183,7 @@ export const Register = () => {
                 fullWidth
               ></TextField>
               <TextField
+                type="password"
                 className="form__input"
                 name="confirmPassword"
                 label="Confirm Password"

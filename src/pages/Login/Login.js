@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import "./style.css";
 import authService from "../../service/auth-service";
 import { toast } from "react-toastify";
+import { routePaths } from "../../utils/enum";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -27,21 +28,24 @@ export const Login = () => {
 
   const onSubmit = (data) => {
     authService.login(data).then((res) => {
-      if (!res.id) return;
       toast.success("Login successfull!!");
-      navigate("/");
+      console.log("result", res);
+      // if (!res.id) return;
+      // navigate(routePaths.home);
     });
   };
 
   return (
     <>
       <Breadcrumbs separator=">" aria-label="breadcrumbs">
-        <Link href="#" color="inherit" onClick={(e) => e.preventDefault()}>
+        <Link
+          to={routePaths.home}
+          color="inherit"
+          onClick={(e) => e.preventDefault()}
+        >
           Home
         </Link>
-        <Link href="#" color="inherit" onClick={(e) => e.preventDefault()}>
-          Login
-        </Link>
+        <Typography color="primary">Login</Typography>
       </Breadcrumbs>
       <Typography variant="h3" align="center" className="login__header">
         Login to Your Account
@@ -65,7 +69,7 @@ export const Login = () => {
             View and track orders and more
           </Typography>
 
-          <Link to="/register">
+          <Link to={routePaths.register}>
             <Button variant="contained" color="primary" className="login__btn">
               Create an Account
             </Button>
@@ -97,18 +101,20 @@ export const Login = () => {
               <form onSubmit={handleSubmit}>
                 <TextField
                   className="login__input"
+                  type="email"
                   name="email"
                   label="Email"
-                  variant="outlined"
-                  fullWidth
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  helperText={touched.email ? errors.email : ""}
                   error={touched.email && Boolean(errors.email)}
-                  helperText={touched.email && errors.email}
+                  variant="outlined"
+                  fullWidth
                 ></TextField>
                 <TextField
                   className="login__input"
+                  type="password"
                   name="password"
                   label="Password"
                   variant="outlined"
@@ -117,7 +123,7 @@ export const Login = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={touched.password && Boolean(errors.password)}
-                  helperText={touched.password && errors.password}
+                  helperText={touched.password ? errors.password : ""}
                 ></TextField>
 
                 <Button

@@ -1,31 +1,24 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
-import { Products } from "./Products";
-import { Home } from "./Home";
-import { Contact } from "./Contact";
-import { NavBar } from "./component/NavBar/NavBar";
 import { Footer } from "./component/Footer/Footer";
-import { Register } from "./pages/Register/Register";
+import { NavBar } from "./component/NavBar/NavBar";
 import { theme } from "./theme/index";
-import { Login } from "./pages/Login/Login";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { MainNavigation } from "./component/MainNavigation";
 
 function App() {
   let navlinks = ["register", "login", "products", "contact"];
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <ToastContainer />
       <BrowserRouter>
         <div className="App">
           <div className="container">
             <NavBar navs={navlinks} />
-            <Routes>
-              <Route path="/" element={<Home />}></Route>
-              <Route path="/login" element={<Login />}></Route>
-              <Route path="/products" element={<Products />}></Route>
-              <Route path="/contact" element={<Contact />}></Route>
-              <Route path="/register" element={<Register />}></Route>
-            </Routes>
+            <MainNavigation />
             <Footer />
           </div>
         </div>

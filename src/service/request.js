@@ -1,8 +1,8 @@
-const { default: axios } = require("axios");
+import axios from "axios";
 const { toast } = require("react-toastify");
 
 const request = axios.create({
-  baseURL: "https://127.0.0.1:5000",
+  baseURL: "https://book-e-sell-node-api.vercel.app/",
   timeout: 12400000,
   responseType: "json",
 });
@@ -32,11 +32,11 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   (response) => {
     let { data } = response;
+    console.log("response", response);
     removeRequest(response.config.url);
-
-    if (data.code && data.code !== 200) {
+    if (data?.code && data?.code !== 200) {
       toast.error(
-        response.data.error || "Something went wrong, Please try again!"
+        response.data.error ?? "Something went wrong, Please try again!"
       );
       return Promise.reject(new Error(data.error || "Error"));
     } else {
@@ -44,8 +44,9 @@ request.interceptors.response.use(
     }
   },
   (error) => {
+    console.log("responseeee error,", error);
     removeRequest(error.config.url);
-    toast.error(error.response.data.error || "Something went wrong!!");
+    toast.error(error?.response?.data?.error ?? "Something went wrong!!");
     return Promise.reject(error);
   }
 );
