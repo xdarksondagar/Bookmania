@@ -1,29 +1,33 @@
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
-import { Footer } from "./component/Footer/Footer";
-import { NavBar } from "./component/NavBar/NavBar";
-import { theme } from "./theme/index";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { theme } from "./utils/theme";
+import { Footer } from "./component/Footer/Footer";
 import { MainNavigation } from "./component/MainNavigation";
+import loader from "./assets/images/loader.gif";
+import { Header } from "./component/Header/Header";
+import { AuthWrapper } from "./context/auth";
 
 function App() {
-  let navlinks = ["register", "login", "products", "contact"];
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <ToastContainer />
-      <BrowserRouter>
-        <div className="App">
-          <div className="container">
-            <NavBar navs={navlinks} />
-            <MainNavigation />
-            <Footer />
+    <BrowserRouter>
+      <AuthWrapper>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <ToastContainer />
+          <div className="loader-wrapper">
+            <img src={loader} alt="loader" />
           </div>
-        </div>
-      </BrowserRouter>
-    </ThemeProvider>
+          <Header />
+          <main>
+            <MainNavigation />
+          </main>
+          <Footer />
+        </ThemeProvider>
+      </AuthWrapper>
+    </BrowserRouter>
   );
 }
 

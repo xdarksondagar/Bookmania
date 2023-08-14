@@ -1,4 +1,4 @@
-export const routePaths = {
+export const RoutePaths = {
   Login: "/login",
   Register: "/register",
   User: "/user",

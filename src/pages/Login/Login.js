@@ -1,4 +1,10 @@
-import { Breadcrumbs, Button, Typography, TextField } from "@material-ui/core";
+import {
+  Breadcrumbs,
+  Button,
+  Typography,
+  TextField,
+  CardContent,
+} from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -6,9 +12,11 @@ import "./style.css";
 import authService from "../../service/auth-service";
 import { toast } from "react-toastify";
 import { routePaths } from "../../utils/enum";
+import { useAuthContext } from "../../context/auth";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const authContext = useAuthContext;
 
   const initialValues = [
     {
@@ -29,9 +37,7 @@ export const Login = () => {
   const onSubmit = (data) => {
     authService.login(data).then((res) => {
       toast.success("Login successfull!!");
-      console.log("result", res);
-      // if (!res.id) return;
-      // navigate(routePaths.home);
+      authContext.setUser(res);
     });
   };
 
@@ -48,7 +54,7 @@ export const Login = () => {
         <Typography color="primary">Login</Typography>
       </Breadcrumbs>
       <Typography variant="h3" align="center" className="login__header">
-        Login to Your Account
+        Login to Your Accountm
       </Typography>
 
       <div className="login__container">
@@ -76,7 +82,7 @@ export const Login = () => {
           </Link>
         </div>
 
-        <div>
+        <CardContent>
           <Typography variant="h6" className="login__title">
             Registered customers
           </Typography>
@@ -137,7 +143,7 @@ export const Login = () => {
               </form>
             )}
           </Formik>
-        </div>
+        </CardContent>
       </div>
     </>
   );

@@ -1,5 +1,6 @@
-/* SOME RESETS */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+/* reset-css */
 
 * {
   margin: 0;
@@ -14,11 +15,6 @@
 :after,
 :before {
   box-sizing: border-box;
-}
-
-:root {
-  --color-primary: #009688;
-  --color-secondary: #ffeb3b;
 }
 
 div {
@@ -434,10 +430,10 @@ body.open-menu {
   background-color: rgba(241, 77, 84, 0.7);
   color: #fff;
 }
-.search-overlay {
+.search-overlay{
   display: none;
 }
-.search-results-open .search-overlay {
+.search-results-open .search-overlay{
   display: block;
   position: absolute;
   top: 0;
