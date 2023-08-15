@@ -5,6 +5,7 @@ import { Register } from "./../pages/Register/Register";
 import { useAuthContext } from "../context/auth";
 import { BookListing } from "../pages/Booklisting/index";
 import { Book } from "../pages/Book";
+import { EditBook } from "../pages/Book/editBook";
 
 export const MainNavigation = () => {
   const authContext = useAuthContext();
@@ -23,6 +24,16 @@ export const MainNavigation = () => {
         exact
         path={routePaths.Book}
         element={authContext.user.id ? <Book /> : Redirect}
+      ></Route>
+      <Route
+        exact
+        path={routePaths.EditBook}
+        element={authContext.user.id ? <EditBook /> : Redirect}
+      ></Route>
+      <Route
+        exact
+        path={routePaths.AddBook}
+        element={authContext.user.id ? <EditBook /> : Redirect}
       ></Route>
     </Routes>
   );
