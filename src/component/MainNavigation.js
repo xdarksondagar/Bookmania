@@ -10,6 +10,7 @@ export const MainNavigation = () => {
     <Routes>
       <Route exact path={routePaths.Login} element={<Login />}></Route>
       <Route exact path={routePaths.Register} element={<Register />}></Route>
+      <Route exact path={routePaths.BookListing} element={<Register />}></Route>
     </Routes>
   );
 };

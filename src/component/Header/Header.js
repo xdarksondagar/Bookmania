@@ -8,8 +8,10 @@ import cartIcon from "../../assets/images/cart.png";
 import searchIcon from "../../assets/images/search.png";
 import bookService from "../../service/book-service";
 import { useAuthContext } from "./../../context/auth";
+import { headerStyle } from "./style";
 
 export const Header = () => {
+  const classes = headerStyle();
   const authContext = useAuthContext();
   const open = false;
   const [query, setQuery] = useState("");
@@ -46,7 +48,7 @@ export const Header = () => {
   };
 
   return (
-    <div>
+    <div className={classes.headerWrapper}>
       <AppBar className="site-header" id="header" position="static">
         <div
           className="top-header"

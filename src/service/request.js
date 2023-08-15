@@ -1,5 +1,5 @@
 import axios from "axios";
-const { toast } = require("react-toastify");
+import { toast } from "react-toastify";
 
 const request = axios.create({
   baseURL: "https://book-e-sell-node-api.vercel.app/",
@@ -31,7 +31,7 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response) => {
-    let { data } = response;
+    const { data } = response;
     console.log("response", response);
     removeRequest(response.config.url);
     if (data?.code && data?.code !== 200) {
