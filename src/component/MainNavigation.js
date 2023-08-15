@@ -4,6 +4,7 @@ import { Login } from "./../pages/Login/Login";
 import { Register } from "./../pages/Register/Register";
 import { useAuthContext } from "../context/auth";
 import { BookListing } from "../pages/Booklisting/index";
+import { Book } from "../pages/Book";
 
 export const MainNavigation = () => {
   const authContext = useAuthContext();
@@ -18,11 +19,11 @@ export const MainNavigation = () => {
         path={routePaths.BookListing}
         element={authContext.user.id ? <BookListing /> : Redirect}
       ></Route>
-      {/* <Route
+      <Route
         exact
-        path={routePaths.BookListing}
-        element={<h1>Hello home is here</h1>}
-      ></Route> */}
+        path={routePaths.Book}
+        element={authContext.user.id ? <Book /> : Redirect}
+      ></Route>
     </Routes>
   );
 };
