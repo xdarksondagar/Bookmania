@@ -8,6 +8,8 @@ import { Book } from "../pages/Book";
 import { EditBook } from "../pages/Book/editBook";
 import { User } from "../pages/User";
 import { EditUser } from "../pages/User/editUser";
+import { Category } from "../pages/Category";
+import { EditCategory } from "../pages/Category/editCategory";
 
 export const MainNavigation = () => {
   const authContext = useAuthContext();
@@ -48,6 +50,22 @@ export const MainNavigation = () => {
         exact
         path={routePaths.EditUser}
         element={authContext.user.id ? <EditUser /> : Redirect}
+      ></Route>
+
+      <Route
+        exact
+        path={routePaths.Category}
+        element={authContext.user.id ? <Category /> : Redirect}
+      ></Route>
+      <Route
+        exact
+        path={routePaths.EditCategory}
+        element={authContext.user.id ? <EditCategory /> : Redirect}
+      ></Route>
+      <Route
+        exact
+        path={routePaths.AddCategory}
+        element={authContext.user.id ? <EditCategory /> : Redirect}
       ></Route>
     </Routes>
   );
