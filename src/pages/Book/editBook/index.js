@@ -112,7 +112,7 @@ export const EditBook = () => {
       <div className="container">
         <Typography variant="h1">{id ? "Edit" : "Add"} Book</Typography>
         <Formik
-          initialValue={initialValueState}
+          initialValues={initialValueState}
           validationSchema={validationSchema}
           enableReinitialize={true}
           onSubmit={onSubmit}

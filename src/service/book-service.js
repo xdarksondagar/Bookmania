@@ -14,7 +14,7 @@ const searchBook = async (searchText) => {
   });
 };
 
-const getByID = async (id) => {
+const getById = async (id) => {
   const url = `${ENDPOINT}/byId?id=${id}`;
   return request.get(url).then((res) => res);
 };
@@ -33,6 +33,6 @@ const save = async (data) => {
   }
 };
 
-const bookService = { getAll, getByID, searchBook, deleteBook, save };
+const bookService = { getAll, getById, searchBook, deleteBook, save };
 
 export default bookService;
