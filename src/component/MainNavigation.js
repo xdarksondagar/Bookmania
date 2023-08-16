@@ -10,6 +10,7 @@ import { User } from "../pages/User";
 import { EditUser } from "../pages/User/editUser";
 import { Category } from "../pages/Category";
 import { EditCategory } from "../pages/Category/editCategory";
+import { UpdateProfile } from "../pages/Upadate-Profile";
 
 export const MainNavigation = () => {
   const authContext = useAuthContext();
@@ -66,6 +67,12 @@ export const MainNavigation = () => {
         exact
         path={routePaths.AddCategory}
         element={authContext.user.id ? <EditCategory /> : Redirect}
+      ></Route>
+
+      <Route
+        exact
+        path={routePaths.UpdateProfile}
+        element={authContext.user.id ? <UpdateProfile /> : Redirect}
       ></Route>
     </Routes>
   );
