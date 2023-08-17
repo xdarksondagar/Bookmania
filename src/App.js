@@ -9,23 +9,26 @@ import { MainNavigation } from "./component/MainNavigation";
 import loader from "./assets/images/loader.gif";
 import { Header } from "./component/Header/Header";
 import { AuthWrapper } from "./context/auth";
+import { CartWrapper } from "./context/cart";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthWrapper>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <ToastContainer />
-          <div className="loader-wrapper">
-            <img src={loader} alt="loader" />
-          </div>
-          <Header />
-          <main>
-            <MainNavigation />
-          </main>
-          <Footer />
-        </ThemeProvider>
+        <CartWrapper>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <ToastContainer />
+            <div className="loader-wrapper">
+              <img src={loader} alt="loader" />
+            </div>
+            <Header />
+            <main>
+              <MainNavigation />
+            </main>
+            <Footer />
+          </ThemeProvider>
+        </CartWrapper>
       </AuthWrapper>
     </BrowserRouter>
   );

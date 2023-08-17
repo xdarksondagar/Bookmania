@@ -15,9 +15,13 @@ import { materialCommonStyles } from "../../utils/materialCommonStyle";
 import { Pagination } from "@material-ui/lab";
 import bookService from "./../../service/book-service";
 import categoryService from "./../../service/category-service";
+import { useCartContext } from "../../context/cart";
+import shared from "../../utils/shared";
+import { toast } from "react-toastify";
 
 export const BookListing = () => {
   const authContext = useAuthContext();
+  const cartContext = useCartContext();
   const classes = productListingStyle();
   const materialClasses = materialCommonStyles();
   const [bookResponse, setBookResponse] = useState({
@@ -63,6 +67,16 @@ export const BookListing = () => {
     }
     return [];
   }, [categories, bookResponse]);
+
+  const addToCart = (book) => {
+    shared.addToCart(book, authContext.user.id).then((res) => {
+      if (res.error) toast.error(res.message);
+      else {
+        toast.success(res.message);
+        cartContext.updateCart();
+      }
+    });
+  };
 
   const sortBooks = (e) => {
     setSortBy(e.target.value);
@@ -138,7 +152,10 @@ export const BookListing = () => {
                       </span>
                     </p>
                     <button className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-disableElevation btn primary-btn">
-                      <span className="MuiButton-label" onClick={() => {}}>
+                      <span
+                        className="MuiButton-label"
+                        onClick={() => addToCart(book)}
+                      >
                         ADD TO CART
                       </span>
                       <span className="MuiTouchRipple-root"></span>

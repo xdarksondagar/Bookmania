@@ -18,7 +18,6 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
 import { ConfirmationDiaolog } from "../../component/ConfirmationDialog";
 
 export const User = () => {

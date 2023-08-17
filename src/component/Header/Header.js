@@ -9,10 +9,13 @@ import searchIcon from "../../assets/images/search.png";
 import bookService from "../../service/book-service";
 import { useAuthContext } from "./../../context/auth";
 import { headerStyle } from "./style";
+import { toast } from "react-toastify";
+import { useCartContext } from "../../context/cart";
 
 export const Header = () => {
   const classes = headerStyle();
   const authContext = useAuthContext();
+  const cartContext = useCartContext();
   const open = false;
   const [query, setQuery] = useState("");
   const [booklist, setBooklist] = useState([]);
@@ -45,6 +48,22 @@ export const Header = () => {
     document.body.classList.add("search-results-open");
     searchBook();
     setOpenSearchRes(true);
+  };
+
+  const addToCart = (book) => {
+    if (!authContext.user.id) {
+      navigate(routePaths.Login);
+      toast.error("Please login before adding books to cart");
+    } else {
+      shared.addToCart(book, authContext.user.id).then((res) => {
+        if (res.error) {
+          toast.error(res.error);
+        } else {
+          toast.success("Item added to cart");
+          cartContext.updateCart();
+        }
+      });
+    }
   };
 
   return (
@@ -153,7 +172,9 @@ export const Header = () => {
                                   </div>
                                   <div className="right-col">
                                     <span className="price">{item.price}</span>
-                                    <Link onClick={() => {}}>Add to Cart</Link>
+                                    <Link onClick={() => addToCart(item)}>
+                                      Add to Cart
+                                    </Link>
                                   </div>
                                 </div>
                               </ListItem>

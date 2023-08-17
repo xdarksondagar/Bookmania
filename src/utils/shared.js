@@ -1,4 +1,18 @@
+import cartService from "./../service/cart-service";
 import { Role, routePaths } from "./enum";
+
+const addToCart = async (book, id) => {
+  return cartService
+    .add({ userId: id, bookId: book.id, quantity: 1 })
+    .then((res) => {
+      return { error: false, message: "Item added in cart" };
+    })
+    .catch((e) => {
+      if (e.status === 500)
+        return { error: true, message: "Item already in the cart" };
+      else return { error: true, message: "something went wrong" };
+    });
+};
 
 const messages = {
   USER_DELETE: "Are you sure you want to delete this user?",
@@ -34,11 +48,6 @@ const NavigationItems = [
     route: routePaths.UpdateProfile,
     access: [Role.Admin, Role.Buyer, Role.Seller],
   },
-  // {
-  //   name: "Cart",
-  //   route: "/cart",
-  //   access: [1, 3, 2],
-  // },
 ];
 
 const hasAccess = (pathname, user) => {
@@ -55,6 +64,7 @@ const hasAccess = (pathname, user) => {
 };
 
 export default {
+  addToCart,
   hasAccess,
   messages,
   LocalStorageKeys,

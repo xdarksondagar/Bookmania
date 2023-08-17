@@ -11,6 +11,7 @@ import { EditUser } from "../pages/User/editUser";
 import { Category } from "../pages/Category";
 import { EditCategory } from "../pages/Category/editCategory";
 import { UpdateProfile } from "../pages/Upadate-Profile";
+import { Cart } from "./../pages/Cart/index";
 
 export const MainNavigation = () => {
   const authContext = useAuthContext();
@@ -73,6 +74,12 @@ export const MainNavigation = () => {
         exact
         path={routePaths.UpdateProfile}
         element={authContext.user.id ? <UpdateProfile /> : Redirect}
+      ></Route>
+
+      <Route
+        exact
+        path={routePaths.Cart}
+        element={authContext.user.id ? <Cart /> : Redirect}
       ></Route>
     </Routes>
   );
