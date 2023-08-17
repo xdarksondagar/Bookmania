@@ -56,14 +56,14 @@ const productStyle = makeStyles((theme) => ({
           color: colors.white,
         },
       },
-      "& .pink-btn": {
+      "& .danger-btn": {
         height: "30px",
         lineHeight: "30px",
         minWidth: "80px",
         fontSize: "14px",
         backgroundColor: "transparent",
         color: colors.primary,
-        border: "1px solid #f14d54",
+        border: "1px solid #ff0004",
         marginLeft: "10px",
         borderRadius: "4px",
         padding: "0 10px",

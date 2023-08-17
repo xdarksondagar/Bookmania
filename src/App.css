@@ -275,7 +275,8 @@ body {
   background-color: #528512;
 }
 
-.btn.pink-btn {
+.btn.primary-btn,
+.btn.danger-btn {
   color: #fff;
   background-color: #f14d54;
   height: 47px;
@@ -286,7 +287,8 @@ body {
   border-radius: 2px;
 }
 
-.btn.pink-btn:hover {
+.btn.primary-btn:hover,
+.btn.danger-btn:hover {
   background-color: #ff101b;
 }
 

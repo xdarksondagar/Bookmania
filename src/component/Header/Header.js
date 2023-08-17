@@ -37,6 +37,7 @@ export const Header = () => {
 
   const logout = () => {
     authContext.signOut();
+    cartContext.emptyCart();
   };
 
   const searchBook = async () => {
@@ -86,49 +87,52 @@ export const Header = () => {
                 </Link>
               </div>
               <div className="nav-wrapper">
-                <List className="top-nav-bar">
-                  {!authContext.user.id && (
-                    <>
-                      <ListItem>
-                        <NavLink to={routePaths.Login} title="Login">
-                          Login
+                <div className="top-right-bar">
+                  <List className="top-nav-bar">
+                    {!authContext.user.id && (
+                      <>
+                        <ListItem>
+                          <NavLink to={routePaths.Login} title="Login">
+                            Login
+                          </NavLink>
+                        </ListItem>
+                        <ListItem>
+                          <NavLink to={routePaths.Register} title="Register">
+                            Register
+                          </NavLink>
+                        </ListItem>
+                      </>
+                    )}
+                    {items.map((item, index) => (
+                      <ListItem key={index}>
+                        <NavLink to={item.route} title={item.name}>
+                          {item.name}
                         </NavLink>
                       </ListItem>
-                      <ListItem>
-                        <NavLink to={routePaths.Register} title="Register">
-                          Register
-                        </NavLink>
-                      </ListItem>
-                    </>
-                  )}
-                  {items.map((item, index) => (
-                    <ListItem key={index}>
-                      <NavLink to={item.route} title={item.name}>
-                        {item.name}
-                      </NavLink>
-                    </ListItem>
-                  ))}
-                </List>
-
-                <List className="cart-country-wrap">
-                  <ListItem className="cart-link">
-                    <Link to={routePaths.Cart} title="Cart">
-                      <img src={cartIcon} alt="cart_icon" />
-                      Cart
-                    </Link>
-                  </ListItem>
-                  <ListItem className="hamburger" onClick={openMenu}>
-                    <span></span>
-                  </ListItem>
-                </List>
-
-                {authContext.user.id && (
-                  <List className="right">
-                    <Button variant="outlined" onClick={() => logout()}>
-                      Logout
-                    </Button>
+                    ))}
                   </List>
-                )}
+
+                  <List className="cart-country-wrap">
+                    <ListItem className="cart-link">
+                      <Link to={routePaths.Cart} title="Cart">
+                        <img src={cartIcon} alt="cart_icon" />
+                        <span>{cartContext.cartData.length}</span>
+                        Cart
+                      </Link>
+                    </ListItem>
+                    <ListItem className="hamburger" onClick={openMenu}>
+                      <span></span>
+                    </ListItem>
+                  </List>
+
+                  {authContext.user.id && (
+                    <List className="right">
+                      <Button variant="outlined" onClick={() => logout()}>
+                        Logout
+                      </Button>
+                    </List>
+                  )}
+                </div>
               </div>
             </div>
           </div>

@@ -142,7 +142,7 @@ export const Book = () => {
                     </Button>
                     <Button
                       type="button"
-                      className="danger-btn btn"
+                      className="btn danger-btn"
                       variant="contained"
                       color="primary"
                       disableElevation
